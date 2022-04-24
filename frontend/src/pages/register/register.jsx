@@ -1,56 +1,78 @@
 import "./register.scss";
-import Axios from 'axios';
 import React from 'react';
-import { useState } from "react";
-import { useForm } from 'react-hook-form';
-/*const Login = () => {
-  return (
-    <div>Login</div>
-  )
-}*/
-//export default Login
+import { useState  } from "react";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
+function Register()
+{
+  const  navigate = useNavigate()
 
-export default function Register() {
-  const [usernameReg, setUsernameReg] = useState('');
-  const [passwordReg, setPasswordReg] = useState('');
-  const [emailReg, setEmailReg] = useState('')
-  
-  /*const { register, handleSubmit, formState: { errors } } = useForm();*/
-  const {handleSubmit, formState: {errors}} =useForm();
-  const onSubmit = data => console.log(data);
-  console.log(errors);
-  
-  
-  const register = async() => {
-    const userDetails = {usernameReg,passwordReg,emailReg}
-    await Axios.post('http://localhost:5000/api/register',userDetails).then((response) => {
-      console.log(response);
-    });
-  };
-  return (
+  const [name,setName]= useState('')
+  const [email,setEmail]= useState('')
+  const [password,setPassword]= useState('')
+  const [roles,setRoles]= useState('')
 
-    
+  async function registerUser(event) {
+    event.preventDefault()
+    const response = await fetch('http://localhost:5000/api/register',{
+      method:'POST',
+      headers:{
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name,email,password,roles
+      })
+  })
+    const data =await response.json()
+
+    if (data.user)
+    {
+      alert('Register successful!')
+      window.location.href='/login'
+    }else{
+      alert('This email has been used already.')
+    }
+    console.log(data)
+  }
+
+  return(
     <div className="register">
-    
-    
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <input type="text"
-      onChange={(e)=> {setUsernameReg(e.target.value)}}
-      placeholder="Name"  />
-     
-     <input type="email"
-     onChange={(e)=> {setEmailReg(e.target.value)}}
-     placeholder="Email"  />
       
-      <input type="password" 
-      onChange={(e)=> {setPasswordReg(e.target.value)}}
-      placeholder="Password"  />
-      
-      <input type="password" placeholder="Retype Password"  />
-      {/* //<input onClick={register} type="submit" /> */}
-      <button onClick={register}>Register</button>
-    </form>
+      <form onClick={registerUser}>
+        <input 
+        value={name}
+        onChange={(e)=>setName(e.target.value)}
+        type="text" 
+        placeholder="Name" />
+        <br></br>
+        <input 
+        value={email}
+        onChange={(e)=>setEmail(e.target.value)}
+        type="email" placeholder="Email" />
+        <br></br>
+        <input 
+        value={password}
+        onChange={(e)=>setPassword(e.target.value)}
+        type="password" placeholder="Password" />
+        <br></br>
+
+        <select name='roles' onChange={(e)=>setRoles(e.target.value)}>
+            <option value="none" selected disabled hidden>Select an Option</option>
+            <option value='Admin' selected={roles === 'Admin'}>Admin</option>
+            <option value='QA' selected={roles === 'QA'}>QA</option>
+            <option value='Developer' selected={roles === 'Developer'}>Developer</option>
+          </select>
+        <br></br>
+        
+        <button type="submit" 
+          onclick="submit">
+              Register
+          </button>
+      </form>
     </div>
-  );
+  )
 }
+
+
+export default Register

@@ -66,3 +66,28 @@ exports.deleteIssue = asyncHandler(async (req, res, next) => {
     data: {},
   });
 });
+
+const issue=(req, res, next) => {
+  
+
+      let issue =new Issue ({
+          name: req.body.name,
+          status: req.body.status,
+          description: req.body.description,
+          priority: req.body.priority,
+      })
+      issue.save()
+      .then(issue => {
+          res.json({
+              message: 'Issue added successfully!'
+              
+          })
+      })
+      .catch(error => {
+          res.json({
+              message: 'An error occured!'
+          })
+      })
+    }
+
+    module.exports={issue}

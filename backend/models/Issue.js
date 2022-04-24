@@ -1,9 +1,14 @@
 const mongoose = require("mongoose");
 
 const IssueSchema = new mongoose.Schema({
-  project: {
+  name: {
     type: String,
     //required: [true, "Please add project name"],
+    trim: true,
+  },
+  status: {
+    type: String,
+    //required: [true, "Please add issue description"],
     trim: true,
   },
   description: {
@@ -16,11 +21,11 @@ const IssueSchema = new mongoose.Schema({
     //required: [true, "Please add issue priority"],
     trim: true,
   },
-  assignedTo: {
-    type: String,
-   // required: [true, "Please add assigned to name"],
-    trim: true,
-  },
+  // assignedTo: {
+  //   type: String,
+  //  // required: [true, "Please add assigned to name"],
+  //   trim: true,
+  // },
   timestamps: {
     type: Date,
     default: Date.now,
