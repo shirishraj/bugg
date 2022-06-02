@@ -1,0 +1,32 @@
+.issue {
+  display: flex;
+  width: 100%;
+  padding: 10px;
+
+  .issueContainer {
+    flex: 6;
+
+    .issueform{
+      padding-left: 10px;
+
+      .form{
+        padding: 20px;
+
+        .h1{
+          padding: 10px;
+        }
+  
+        .h5{
+          padding: 10px;
+        }
+      }
+      .submit{
+        padding:10px;
+      }
+
+      
+    }
+
+  }
+  
+}

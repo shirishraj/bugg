@@ -1,7 +1,7 @@
 import React, { Component, useEffect } from 'react';
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
-import "./dashboard.scss";
+import "./dashboardAdmin.scss";
 import Widget from "../../components/widget/Widget";
 import Featured from "../../components/featured/Featured";
 import Chart from "../../components/chart/Chart";
@@ -10,7 +10,7 @@ import Table from "../../components/table/Table";
 import { useNavigate } from 'react-router-dom';
 
 
-const Daashboard = () => {
+const DashboardAdmin = () => {
 
   // const history =useNavigate()
   // useEffect(()=> {
@@ -48,4 +48,4 @@ const Daashboard = () => {
   );
 };
 
-export default Daashboard;
+export default DashboardAdmin;

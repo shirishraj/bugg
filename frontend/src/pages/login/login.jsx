@@ -1,33 +1,7 @@
 import "./login.scss"
-
 import { useState } from "react";
-import { Link } from "react-router-dom";
-
 import React from 'react';
-import { useForm } from 'react-hook-form';
-
-// export default function Login() {
-  
-//   const { register , handleSubmit, formState: { errors } } = useForm();
-//   const onSubmit = data => console.log(data);
-//   console.log(errors);
-  
-//   return (
-
-    
-//     <div className="login">
-    
-    
-//     <form onSubmit={handleSubmit(onSubmit)}>
-//       <input type="text" placeholder="Name" {...register("Name", {required: true, maxLength: 80})} />
-      
-//       <input type="password" placeholder="Password" {...register("Password", {required: true, maxLength: 40})} />
-      
-//       <input type="submit" />
-//     </form>
-//     </div>
-//   );
-// }
+import { json } from "express";
 
 function Login()
 {
@@ -47,11 +21,19 @@ function Login()
   })
     const data =await response.json()
 
-    if(data.user){
-      alert('Login successful')
-      window.location.href='/'
-    }else{
-      alert('Please check your username and password')
+    if(data.status==='ok'){
+      //store JWT token
+      alert(JSON.stringify(data));
+      localStorage.setItem("token", data["token"]);
+      //window.location.href='/dashboard';
+
+    }
+    
+    else if (data.status='501'){
+      alert('Please check your password')
+    }
+    else if (data.status='500'){
+      alert('Please check your username ')
     }
 
     console.log(data)

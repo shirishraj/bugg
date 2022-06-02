@@ -26,11 +26,14 @@ function Register()
   })
     const data =await response.json()
 
-    if (data.user)
+    if (data.status==='ok')
     {
       alert('Register successful!')
       window.location.href='/login'
-    }else{
+    }else if (data.error){
+      alert('This email has been used already.')
+    }
+    else{
       alert('This email has been used already.')
     }
     console.log(data)

@@ -30,6 +30,12 @@ function IssueForm()
     })
     const data= await response.json()
 
+    if(data.message==='Issue added successfully!'){
+      alert('Issue successfully added')
+    }
+    else{
+      alert('Please enter the fields ')
+    }
     console.log(data)
   }
   

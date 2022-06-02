@@ -1,20 +1,12 @@
 const Project = require('../models/Project')
-const bcrypt= require('bcrypt')
-const jwt = require('jsonwebtoken')
 
 const project=(req, res, next) => {
-    bcrypt.hash(req.body.password,10,function(err,hashedPass){
-        if(err){
-            res.json({
-                error:err
-            })
-        }
+    
 
         let project =new Project ({
-            project_name: req.body.project_name,
+            projectname: req.body.projectname,
             user: req.body.user,
-            email: req.body.email,
-            password: hashedPass
+            role: req.body.role,
         })
         project.save()
         .then(project => {
@@ -28,10 +20,10 @@ const project=(req, res, next) => {
                 message: 'An error occured!'
             })
         })
-    })
+    }
 
     
-}
+
 
  module.exports={
      project

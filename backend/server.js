@@ -6,10 +6,10 @@ const connectDB = require("./config/db");
 const errorHandler = require("./middlewares/error");
 const cors = require("cors");
 const bcrypt= require('bcrypt')
-
+const jwt =require('jsonwebtoken')
 const AuthRoute =require('./routes/auth');
 const IssueRoute =require('./routes/issue');
-
+const ProjectRoute =require('./routes/project');
 
 //loading env variables
 dotenv.config({ path: "./config/config.env" });
@@ -31,6 +31,7 @@ app.use(morgan("dev"));
 //for error response
 app.use(errorHandler);
 //mount routers
+app.use("/api/project", project);
 app.use("/api/issue", issue);
 const PORT = process.env.PORT || 5000;
 const server = app.listen(
@@ -44,6 +45,8 @@ process.on("unhandledRejection", (err, promise) => {
 
 app.post('/api/login',async(req,res)=>{
     const {name,password} =req.body
+    JWT_SECRET = "I'm am the key~~@-@~~E."
+
     const user = await User.findOne({
       name
     }).lean()
@@ -52,15 +55,18 @@ app.post('/api/login',async(req,res)=>{
 
     if (!user){
 
-      return res.json({status:'error', error: 'Invalid username/ password.'})
+      return res.json({status:'500', error: 'Invalid username or password'})
     }
 
     if (await bcrypt.compare(password, user.password)){
-      return res.json({status:'ok',data:''})
+      // return res.json({status:'ok',data:''})
+      const token = jwt.sign({ id: user._id, username: user.username}, JWT_SECRET)
+      return res.status(200).header('auth-token', token).send({token, role: user.roles, status: 'ok'})
     }
      
-    res.json({status:'error', error: 'Invalid username/ password!'})
+    res.json({status:'501', error: 'Invalid username/ password!'})
   }
 )
 app.use('/api',AuthRoute)
 app.use('/api',IssueRoute)
+app.use('/api',ProjectRoute)

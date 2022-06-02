@@ -1,6 +1,5 @@
 const User = require('../models/User')
 const bcrypt= require('bcrypt')
-const jwt = require('jsonwebtoken')
 
 const register=(req, res, next) => {
     bcrypt.hash(req.body.password,10,function(err,hashedPass){
@@ -20,19 +19,18 @@ const register=(req, res, next) => {
         user.save()
         .then(user => {
             res.json({
-                message: 'User added successfully!'
-                
+                message: 'User added successfully!',
+                status:'ok'
             })
         })
         
         .catch(error => {
             res.json({
-                message: 'An error occured!'
+                message: 'An error occured!',
+                status:'error '
             })
         })
-    })
-
-    
+    })  
 }
 
  module.exports={

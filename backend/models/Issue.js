@@ -3,22 +3,22 @@ const mongoose = require("mongoose");
 const IssueSchema = new mongoose.Schema({
   name: {
     type: String,
-    //required: [true, "Please add project name"],
+    required: [true, "Please add project name"],
     trim: true,
   },
   status: {
     type: String,
-    //required: [true, "Please add issue description"],
+    required: [true, "Please add issue description"],
     trim: true,
   },
   description: {
     type: String,
-    //required: [true, "Please add issue description"],
+    required: [true, "Please add issue description"],
     trim: true,
   },
   priority: {
     type: String,
-    //required: [true, "Please add issue priority"],
+    required: [true, "Please add issue priority"],
     trim: true,
   },
   // assignedTo: {

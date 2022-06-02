@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 
 export const userColumns = [
-  { field: "id", headerName: "ID", width: 70 },
   {
-    field: "Member",
-    headerName: "Member",
+    field: "id",
+    headerName: "id",
+    width: 20,
+  },
+  {
+    field: "user",
+    headerName: "user",
     width: 230,
     renderCell: (params) => {
       return (
@@ -39,83 +43,39 @@ export const userColumns = [
 //temporary data
 export const userRows = [
   {
-    id: 1,
-    username: "Snow",
+    id:1,
+    username: "shirish",
     img: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
     status: "active",
-    email: "1snow@gmail.com",
-    age: 35,
+    email: "raj@gmail.com",
   },
   {
     id: 2,
-    username: "Jamie Lannister",
+    username: "tama",
     img: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-    email: "2snow@gmail.com",
+    email: "tama@gmail.com",
     status: "passive",
-    age: 42,
   },
   {
     id: 3,
-    username: "Lannister",
+    username: "nama",
     img: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-    email: "3snow@gmail.com",
-    status: "pending",
-    age: 45,
+    email: "nama@gmail.com",
+    status: "active",
   },
   {
     id: 4,
-    username: "Stark",
+    username: "raja",
     img: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-    email: "4snow@gmail.com",
+    email: "raja@gmail.com",
     status: "active",
-    age: 16,
   },
   {
     id: 5,
-    username: "Targaryen",
+    username: "Julius",
     img: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-    email: "5snow@gmail.com",
+    email: "juli@gmail.com",
     status: "passive",
-    age: 22,
-  },
-  {
-    id: 6,
-    username: "Melisandre",
-    img: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-    email: "6snow@gmail.com",
-    status: "active",
-    age: 15,
-  },
-  {
-    id: 7,
-    username: "Clifford",
-    img: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-    email: "7snow@gmail.com",
-    status: "passive",
-    age: 44,
-  },
-  {
-    id: 8,
-    username: "Frances",
-    img: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-    email: "8snow@gmail.com",
-    status: "active",
-    age: 36,
-  },
-  {
-    id: 9,
-    username: "Roxie",
-    img: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-    email: "snow@gmail.com",
-    status: "pending",
-    age: 65,
-  },
-  {
-    id: 10,
-    username: "Roxie",
-    img: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-    email: "snow@gmail.com",
-    status: "active",
-    age: 65,
-  },
-];
+
+},
+]

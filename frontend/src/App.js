@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import Home from "./pages/dashboard/dashboard";
+import Daashboard from "./pages/dashboard/dashboard";
+import DashboardAdmin from "./pages/dashboardAdmin/dashboardAdmin";
+import DashboardQA from "./pages/dashboardQA/dashboardQA";
+import Home from "./pages/home/Home";
 import Register from "./pages/register/register";
 import Login from "./pages/login/login";
 import List from "./pages/list/List";
@@ -7,6 +10,8 @@ import Single from "./pages/single/Single";
 import New from "./pages/new/New";
 import Issues from "./pages/issues/issues";
 import IssueForm from "./pages/issueform/issueform";
+
+import ProjectForm from "./pages/projectform/projectform";
 import Projects from "./pages/projects/projects";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { productInputs, userInputs } from "./formSource";
@@ -24,11 +29,15 @@ function App() {
         <Routes>
           <Route path="/">
             <Route index element={<Home />} />
+            <Route path="dashboard" element={<Daashboard />} />
+            <Route path="dashboardAdmin" element={<DashboardAdmin />} />
+            <Route path="dashboardQA" element={<DashboardQA />} />
             <Route path="register" element={<Register />} />
             <Route path="login" element={<Login />} />
             <Route path="issues" element={<Issues />} />
             <Route path="projects" element={<Projects />} />
             <Route path="issueform" element={<IssueForm />} />
+            <Route path="projectform" element={<ProjectForm />} />
             <Route path="users">
               <Route index element={<List />} />
               <Route path=":userId" element={<Single />} />
