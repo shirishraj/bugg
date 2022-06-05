@@ -42,7 +42,8 @@ function Register()
   return(
     <div className="register">
       
-      <form onClick={registerUser}>
+      <form onSubmit={registerUser}>
+        <h2>Register Form</h2>
         <input 
         value={name}
         onChange={(e)=>setName(e.target.value)}
@@ -69,7 +70,7 @@ function Register()
         <br></br>
         
         <button type="submit" 
-          onclick="submit">
+          onSubmit="submit">
               Register
           </button>
       </form>

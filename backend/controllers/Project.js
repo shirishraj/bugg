@@ -1,4 +1,18 @@
-const Project = require('../models/Project')
+const ErrorResponse = require("../utils/errorResponse");
+const Project = require('../models/Project');
+const asyncHandler = require("../middlewares/async");
+
+
+const getProjects = asyncHandler(async (req, res, next) => {
+    const project = await Project.find();
+    if (!project) {
+      return next(new ErrorResponse("No data", 404));
+    }
+    res.status(200).json({
+      success: true,
+      data: project,
+    });
+  });
 
 const project=(req, res, next) => {
     
@@ -25,6 +39,4 @@ const project=(req, res, next) => {
     
 
 
- module.exports={
-     project
- }
+ module.exports={project, getProjects}

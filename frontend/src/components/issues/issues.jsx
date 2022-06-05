@@ -1,16 +1,40 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import "./issues.scss";
 import { DataGrid } from "@mui/x-data-grid";
 import { userColumns, userRows } from "../../issuetablesource";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
+
 const Datatable = () => {
-  const [data, setData] = useState(userRows);
+  const [data, setData] = useState([]);
 
   const handleDelete = (id) => {
     setData(data.filter((item) => item.id !== id));
   };
+
+
+useEffect(() => {
+  //get data from the endpoint
+  fetch("http://localhost:5000/api/issues", {
+    method: "GET"
+  })
+  .then((res) => {
+    return res.json()
+  })
+  .then((json) => {
+    console.log(json);
+
+    // provide an 'id' field for displaying
+    var data =[];
+    for (let d of json.data) {
+      d.id = d._id;
+      data.push(d);
+    }
+    setData(json.data);
+
+  })
+}, []);
 
   const actionColumn = [
     {

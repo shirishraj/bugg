@@ -14,4 +14,6 @@ const Issue=require('../controllers/issue')
 // router.route("/:id").get(getIssue).put(updateIssue).delete(deleteIssue);
 module.exports = router;
 
-router.post('/issue',Issue.issue)
+router.post('/issue', Issue.issue)
+router.get('/issues', Issue.getIssues)
+router.get('/getCountIssue', Issue.getCountIssue)

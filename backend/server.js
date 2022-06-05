@@ -33,6 +33,7 @@ app.use(errorHandler);
 //mount routers
 app.use("/api/project", project);
 app.use("/api/issue", issue);
+
 const PORT = process.env.PORT || 5000;
 const server = app.listen(
   PORT,
@@ -42,6 +43,22 @@ process.on("unhandledRejection", (err, promise) => {
   console.log(`Error:${err.message}`);
   server.close(() => process.exit(1));
 });
+
+//returns appropriate role
+app.post('/api/verify', async(req, res) => {
+  let token = req.headers.authorization;
+
+  if (token == "") {
+    return res.json({status: '401', roles: 'None'});
+  }
+  //console.log("टोकन ", req.headers.authorization);
+  decoded = jwt.verify(token,  "I'm am the key~~@-@~~E."); //username and iat
+  var name = decoded.username;
+
+  User.findOne({name}).then(function(user){
+    return res.json({status: '200', id: user.id, name: user.name, roles: user.roles})
+  });
+})
 
 app.post('/api/login',async(req,res)=>{
     const {name,password} =req.body
@@ -60,7 +77,7 @@ app.post('/api/login',async(req,res)=>{
 
     if (await bcrypt.compare(password, user.password)){
       // return res.json({status:'ok',data:''})
-      const token = jwt.sign({ id: user._id, username: user.username}, JWT_SECRET)
+      const token = jwt.sign({ userid: user.id, username: user.name}, JWT_SECRET)
       return res.status(200).header('auth-token', token).send({token, role: user.roles, status: 'ok'})
     }
      

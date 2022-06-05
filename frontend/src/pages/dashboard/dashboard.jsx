@@ -1,4 +1,4 @@
-import React, { Component, useEffect } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import "./dashboard.scss";
@@ -11,20 +11,36 @@ import { useNavigate } from 'react-router-dom';
 
 
 const Daashboard = () => {
+  const [isUserAuthorized, setIsUserAuthorized] = useState(false);
 
-  // const history =useNavigate()
-  // useEffect(()=> {
-  //   const token = localStorage.getItem('token')
-  //   if (token) {
-  //     const user =jwt.decode(token)
-  //     if(!user){
-  //       localStorage.removeItem('token')
-  //       history('/login')
-  //     }else {
-  //       history('/')
-  //     }
-  //   }
-  // },[])
+  useEffect(() => {
+      //use our localStorage's token to
+      //get the server to verify that the current user
+      //is indeed an admin
+      let token = localStorage.getItem('token');
+      
+      fetch("http://localhost:5000/api/verify", {
+          method: "POST",
+          headers: new Headers({
+            'Authorization': token
+          })
+        })
+        .then((res) => {
+          return res.json()
+        })
+        .then((json) => {
+          if (json.roles == "Admin" || json.roles == "Developer") {
+            setIsUserAuthorized(true);
+          }
+        })
+
+  })
+
+  if (!isUserAuthorized) {
+    return (<div><h2>Pratibandhit</h2></div>);
+  }
+
+
 
   return (
     <div className="home">
@@ -33,12 +49,9 @@ const Daashboard = () => {
         <Navbar />
         <div className="widgets">
           <Widget type="user" />
-          <Widget type="order" />
+          
         </div>
-        <div className="charts">
-          <Featured />
-          <Chart title="Last 6 Months (Issues)" aspect={2 / 1} />
-        </div>
+       
         <div className="listContainer">
           <div className="listTitle">Latest Issues</div>
           <Table />

@@ -4,7 +4,7 @@ const Issue = require("../models/Issue");
 
 //@desc     Get all Issues
 //Method    GET /api/Issues
-exports.getIssues = asyncHandler(async (req, res, next) => {
+const getIssues = asyncHandler(async (req, res, next) => {
   const issue = await Issue.find();
   if (!issue) {
     return next(new ErrorResponse("No data", 404));
@@ -67,6 +67,18 @@ exports.deleteIssue = asyncHandler(async (req, res, next) => {
   });
 });
 
+const getCountIssue = asyncHandler(async (req, res, next) => {
+  const issue = await Issue.find().count();
+  if (!issue) {
+    return next(new ErrorResponse("No data", 404));
+  }
+  res.status(200).json({
+    success: true,
+    data: issue,
+  });
+});
+
+
 const issue=(req, res, next) => {
   
 
@@ -90,4 +102,4 @@ const issue=(req, res, next) => {
       })
     }
 
-    module.exports={issue}
+  module.exports={issue, getIssues, getCountIssue}

@@ -1,38 +1,23 @@
-import React, { Component } from 'react';
 
 export const userColumns = [
-  { field: "id", headerName: "ID", width: 70 },
+  { field: "id", headerName: "ID", width: 120 },
   {
-    field: "Name",
+    field: "projectname",
     headerName: "Name",
     width: 230,
     
   },
   {
-    field: "creator",
+    field: "user",
     headerName: "Creator",
-    width: 180,
-  },
-
-  
-
-  {
-    field: "status",
-    headerName: "Status",
     width: 100,
-    renderCell: (params) => {
-      return (
-        <div className={`cellWithStatus ${params.row.status}`}>
-          {params.row.status}
-        </div>
-      );
-    },
   },
 
   {
-    field: "date",
+    field: "createdAt",
     headerName: "Date",
-    width: 120,
+    width: 140
+    ,
   },
   
   {
@@ -43,15 +28,15 @@ export const userColumns = [
   
 ];
 
-//temporary data
-export const userRows = [
-  {
-    id: 1,
-    Name: "Ncell",
+// //temporary data
+// export const userRows = [
+//   {
+//     id: 1,
+//     Name: "Ncell",
     
-    status: "active",
-    date: "26-04-2022",
-    role:"QA",
-    creator: "shirish",
-  },
-];
+//     status: "active",
+//     date: "26-04-2022",
+//     role:"QA",
+//     creator: "shirish",
+//   },
+// ];

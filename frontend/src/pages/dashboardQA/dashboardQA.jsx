@@ -1,30 +1,43 @@
-import React, { Component, useEffect } from 'react';
-import Sidebar from "../../components/sidebar/Sidebar";
+import React, { Component, useEffect, useState } from 'react';
+import Sidebar from "../../components/sidebarQA/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import "./dashboardQA.scss";
 import Widget from "../../components/widget/Widget";
-import Featured from "../../components/featured/Featured";
-import Chart from "../../components/chart/Chart";
+
 import Table from "../../components/table/Table";
-// import jwt from 'jwt-simple';
-import { useNavigate } from 'react-router-dom';
+
 
 
 const DashboardQA = () => {
+  const [isUserAuthorized, setIsUserAuthorized] = useState(false);
 
-  // const history =useNavigate()
-  // useEffect(()=> {
-  //   const token = localStorage.getItem('token')
-  //   if (token) {
-  //     const user =jwt.decode(token)
-  //     if(!user){
-  //       localStorage.removeItem('token')
-  //       history('/login')
-  //     }else {
-  //       history('/')
-  //     }
-  //   }
-  // },[])
+  useEffect(() => {
+      //use our localStorage's token to
+      //get the server to verify that the current user
+      //is indeed an admin
+      let token = localStorage.getItem('token');
+      
+      fetch("http://localhost:5000/api/verify", {
+          method: "POST",
+          headers: new Headers({
+            'Authorization': token
+          })
+        })
+        .then((res) => {
+          return res.json()
+        })
+        .then((json) => {
+          if (json.roles == "Admin" || json.roles == "QA") {
+            setIsUserAuthorized(true);
+          }
+        })
+
+  })
+
+  if (!isUserAuthorized) {
+    return (<div><h2>Forbidden</h2></div>);
+  }
+
 
   return (
     <div className="home">
@@ -33,7 +46,6 @@ const DashboardQA = () => {
         <Navbar />
         <div className="widgets">
           <Widget type="user" />
-          <Widget type="order" />
         </div>
         
         <div className="listContainer">

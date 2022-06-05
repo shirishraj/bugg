@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 export const userColumns = [
   { field: "id", headerName: "ID", width: 70 },
   {
-    field: "Issue",
+    field: "name",
     headerName: "Issue",
     width: 120,
     
@@ -21,7 +21,7 @@ export const userColumns = [
     width: 120,
   },
   {
-    field: "date",
+    field: "timestamps",
     headerName: "Date",
     width: 120,
   },
@@ -41,30 +41,30 @@ export const userColumns = [
 ];
 
 //temporary data
-export const userRows = [
-  {
-    id: 1,
-    Issue: "functional",
-    priority:"Low",
-    creator:"shirish",
-    status: "active",
-    date:"20-04-2022"
-  },
-  {
-    id: 2,
-    Issue: "Nana",
-    priority:"Low",
-    creator:"shirish",
-    status: "active",
-    date:"21-04-2022"
-  },
-  {
-    id: 3,
-    Issue: "Functional issue",
-    priority:"Low",
-    creator:"Julius",
-    status: "pending",
-    date:"22-04-2022"
-  },
+// export const userRows = [
+//   {
+//     id: 1,
+//     Issue: "functional",
+//     priority:"Low",
+//     creator:"shirish",
+//     status: "active",
+//     date:"20-04-2022"
+//   },
+//   {
+//     id: 2,
+//     Issue: "Nana",
+//     priority:"Low",
+//     creator:"shirish",
+//     status: "active",
+//     date:"21-04-2022"
+//   },
+//   {
+//     id: 3,
+//     Issue: "Functional issue",
+//     priority:"Low",
+//     creator:"Julius",
+//     status: "pending",
+//     date:"22-04-2022"
+//   },
   
-];
+// ];

@@ -8,7 +8,7 @@ const projectSchema= new Schema ({
     },
     user:{
         type:String,
-        // ref: 'users',
+        // ref: 'name',
         required:true,
     },
     role:{
@@ -19,5 +19,4 @@ const projectSchema= new Schema ({
     {timestamps: true}
 )
 
-const Project =mongoose.model('Project',projectSchema)
-module.exports = Project
+module.exports  =mongoose.model('Project',projectSchema)

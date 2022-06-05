@@ -1,5 +1,28 @@
 const User = require('../models/User')
+const asyncHandler = require("../middlewares/async");
 const bcrypt= require('bcrypt')
+
+const getUsers = asyncHandler(async (req, res, next) => {
+    const user = await User.find();
+    if (!user) {
+      return next(new ErrorResponse("No data", 404));
+    }
+    res.status(200).json({
+      success: true,
+      data: user,
+    });
+  });
+
+  const getCount = asyncHandler(async (req, res, next) => {
+    const user = await User.find().count();
+    if (!user) {
+      return next(new ErrorResponse("No data", 404));
+    }
+    res.status(200).json({
+      success: true,
+      data: user,
+    });
+  });
 
 const register=(req, res, next) => {
     bcrypt.hash(req.body.password,10,function(err,hashedPass){
@@ -34,5 +57,5 @@ const register=(req, res, next) => {
 }
 
  module.exports={
-     register
+     register, getUsers, getCount
  }

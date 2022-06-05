@@ -1,7 +1,7 @@
 import "./login.scss"
 import { useState } from "react";
 import React from 'react';
-import { json } from "express";
+//import { json } from "express";
 
 function Login()
 {
@@ -22,9 +22,17 @@ function Login()
     const data =await response.json()
 
     if(data.status==='ok'){
-      //store JWT token
-      alert(JSON.stringify(data));
       localStorage.setItem("token", data["token"]);
+      localStorage.setItem("role", data["role"]);
+
+      let role = data["role"];
+      if (role == "Admin") {
+        window.location.href = "/dashboardAdmin";
+      } else if (role == "QA") {
+        window.location.href = "/dashboardQA";
+      } else {
+        window.location.href = "/dashboard";
+      }
       //window.location.href='/dashboard';
 
     }
@@ -35,14 +43,13 @@ function Login()
     else if (data.status='500'){
       alert('Please check your username ')
     }
-
-    console.log(data)
   }
 
   return(
     <div className="login">
       
-      <form onClick={loginUser}>
+      <form onSubmit={loginUser}>
+        <h2>Login Page</h2>
         <input 
         value={name}
         onChange={(e)=>setName(e.target.value)}

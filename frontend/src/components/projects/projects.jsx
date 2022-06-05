@@ -3,14 +3,37 @@ import "./projects.scss";
 import { DataGrid } from "@mui/x-data-grid";
 import { userColumns, userRows } from "../../projectstablesource";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Datatable = () => {
-  const [data, setData] = useState(userRows);
+  const [data, setData] = useState([]);
 
   const handleDelete = (id) => {
     setData(data.filter((item) => item.id !== id));
   };
+
+
+useEffect(() => {
+  //get data from the endpoint
+  fetch("http://localhost:5000/api/projects", {
+    method: "GET"
+  })
+  .then((res) => {
+    return res.json()
+  })
+  .then((json) => {
+    console.log(json);
+
+    // provide an 'id' field for displaying
+    var data =[];
+    for (let d of json.data) {
+      d.id = d._id;
+      data.push(d);
+    }
+    setData(json.data);
+
+  })
+}, []);
 
   const actionColumn = [
     {

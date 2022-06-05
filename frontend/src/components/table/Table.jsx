@@ -7,62 +7,38 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import { useState, useEffect } from 'react';
 
 const List = () => {
-  const rows = [
-    {
-      id: 1143155,
-      issue: "Functional", 
-      img: "https://m.media-amazon.com/images/I/81bc8mA3nKL._AC_UY327_FMwebp_QL65_.jpg",
-      priority: "Severe",
-      date: "1 March",
-      project: "Chimpvine",
-      title: "Button not working",
-      status: "Approved",
-      
-      
-    },
-    {
-      id: 2235235,
-      issue: "Functional",
-      img: "https://m.media-amazon.com/images/I/31JaiPXYI8L._AC_UY327_FMwebp_QL65_.jpg",
-      priority: "Medium",
-      date: "22 March",
-      project: "Worldlink",
-      title: "Form not working",
-      status: "Pending",
-    },
-    {
-      id: 2342353,
-      issue: "Functional",
-      img: "https://m.media-amazon.com/images/I/71kr3WAj1FL._AC_UY327_FMwebp_QL65_.jpg",
-      priority: "Low",
-      date: "4 January",
-      project: "Chimpvine",
-      title: "Button not working",
-      status: "Pending",
-    },
-    {
-      id: 2357741,
-      issue: "Functional",
-      img: "https://m.media-amazon.com/images/I/71wF7YDIQkL._AC_UY327_FMwebp_QL65_.jpg",
-      priority: "Low",
-      date: "11 February",
-      project: "Ncell",
-      title: "Login not working",
-      status: "Approved",
-    },
-    {
-      id: 2342355,
-      issue: "Functional",
-      img: "https://m.media-amazon.com/images/I/81hH5vK-MCL._AC_UY327_FMwebp_QL65_.jpg",
-      priority: "Medium",
-      date: "1 April",
-      project: "OMN",
-      title: "Form not working",
-      status: "Pending",
-    },
-  ];
+  const [data, setData] = useState([]);
+
+  const handleDelete = (id) => {
+    setData(data.filter((item) => item.id !== id));
+  };
+
+
+useEffect(() => {
+  //get data from the endpoint
+  fetch("http://localhost:5000/api/issues", {
+    method: "GET"
+  })
+  .then((res) => {
+    return res.json()
+  })
+  .then((json) => {
+    console.log(json);
+
+    // provide an 'id' field for displaying
+    var data =[];
+    for (let d of json.data) {
+      d.id = d._id;
+      data.push(d);
+    }
+    setData(json.data);
+
+  })
+}, []);
+
   return (
     <TableContainer component={Paper} className="table">
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -78,21 +54,21 @@ const List = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.id}>
-              <TableCell className="tableCell">{row.id}</TableCell>
+          {data.map((data) => (
+            <TableRow key={data.id}>
+              <TableCell className="tableCell">{data.id}</TableCell>
               <TableCell className="tableCell">
                 <div className="cellWrapper">
-                  <img src={row.img} alt="" className="image" />
-                  {row.issue}
+                  
+                  {data.name}
                 </div>  
               </TableCell>
-              <TableCell className="tableCell">{row.priority}</TableCell>
-              <TableCell className="tableCell">{row.date}</TableCell>
-              <TableCell className="tableCell">{row.project}</TableCell>
-              <TableCell className="tableCell">{row.title}</TableCell>
+              <TableCell className="tableCell">{data.priority}</TableCell>
+              <TableCell className="tableCell">{data.timestamps}</TableCell>
+              <TableCell className="tableCell">{data.project}</TableCell>
+              <TableCell className="tableCell">{data.title}</TableCell>
               <TableCell className="tableCell">
-                <span className={`status ${row.status}`}>{row.status}</span>
+                <span className={`status ${data.status}`}>{data.status}</span>
               </TableCell>
             </TableRow>
           ))}

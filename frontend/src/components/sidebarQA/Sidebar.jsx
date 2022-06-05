@@ -19,7 +19,7 @@ const Sidebar = () => {
   return (
     <div className="sidebar">
       <div className="top">
-        <Link to="/home" style={{ textDecoration: "none" }}>
+        <Link to="/" style={{ textDecoration: "none" }}>
           <span className="logo">Bug Track</span>
         </Link>
       </div>
@@ -47,7 +47,7 @@ const Sidebar = () => {
               <span>Projects</span>
             </li>
           </Link>
-          {/* <Link to="/issueform" style={{ textDecoration: "none" }}>
+          <Link to="/issueform" style={{ textDecoration: "none" }}>
             <li>
               <StoreIcon className="icon" />
               <span>Issue form</span>
@@ -58,7 +58,7 @@ const Sidebar = () => {
               <StoreIcon className="icon" />
               <span>Project form</span>
             </li>
-          </Link> */}
+          </Link>
           <li>
             <CreditCardIcon className="icon" />
             <span>TeamInfo</span>

@@ -3,7 +3,6 @@ import { useState } from "react";
 import "./projectform.scss"
 import Sidebar from "../../components/sidebar/Sidebar"
 import Navbar from "../../components/navbar/Navbar"
-import Datatable from "../../components/issues/issues"
 
 
 
@@ -29,12 +28,12 @@ function ProjectForm()
     })
     const data= await response.json()
 
-    // if(data.message==='Project added successfully!'){
-    //   alert('Issue successfully added')
-    // }
-    // else{
-    //   alert('Please enter the fields ')
-    // }
+    if(data.message==='Project added successfully!'){
+      alert('Project successfully added')
+    }
+    else{
+      alert('Please enter the fields ')
+    }
     console.log(data)
   }
   
@@ -52,6 +51,7 @@ function ProjectForm()
           <input 
             type="text"
             placeholder='Project Name'
+            projectname='projectname'
             value={projectname}
             onChange={(e)=>setProjectName(e.target.value)}
           />

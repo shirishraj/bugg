@@ -1,0 +1,91 @@
+.Home{
+
+    height: 100%;
+    width: 100%;
+    background-color: rgb(216, 194, 167);
+.HomeContainer{
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    width: 100%;
+    background-color: rgb(146, 140, 207);
+    .Title{
+        display: flex;
+        align-items: center;
+        min-width: 100%;
+
+        h2{
+            display: flex;
+            font-size: 24pt;
+            align-items: center;
+            padding: 10px;
+        }
+    }
+}
+
+
+    .Info{
+        display: flex;
+        align-items: center;
+        min-width: 100%;
+        padding-left: 10px;
+        height: 100%;
+        h4{
+            display: flex;
+            font-size: 14pt;
+            align-items: center;
+            padding-left: 10px;
+            padding: 10px 10px 10px 10px;
+        }
+    }
+
+.button{
+    
+    padding: 10px;
+    display: block;
+    position: absolute;
+    top: 40%;
+    left: 40%;
+    .CreateAccount{
+        button {
+            cursor: pointer;
+
+            display: block;
+            appearance: none;
+            margin-top: 40px;
+            border: 1px ;
+            margin-bottom: 20px;
+            background: #d489a5;  
+            text-transform: uppercase;
+            padding: 10px 20px;
+            border-radius: 4px;
+            &:hover {
+                background: rgb(139, 68, 68);
+                color: white;
+            }
+        }
+}
+
+    .Login{
+        button {
+            cursor: pointer;
+            position: absolute;
+            display: block;
+            left: 30%;
+            appearance: none;
+            margin-top: 40px;
+            border: 1px ;
+            background: #d489a5;  
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            padding: 10px 20px;
+            border-radius: 4px;
+            &:hover {
+                background: rgb(209, 44, 44);
+                color: white;
+            }
+        }
+
+    }
+}
+}
